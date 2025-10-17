@@ -1,58 +1,81 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <title>Kiểm tra Radio Button</title>
+  <meta charset="UTF-8" />
+  <title>Radio Button Demo</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 50px;
+      background: #f7f9fc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
     }
     .container {
-      max-width: 400px;
-      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 320px;
       text-align: center;
     }
-    button {
-      margin-top: 20px;
-      padding: 8px 16px;
+    h2 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin: 10px 0;
       font-size: 16px;
       cursor: pointer;
+    }
+    button {
+      background: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #0056b3;
     }
     #result {
       margin-top: 20px;
       font-weight: bold;
-      color: blue;
+      color: #007bff;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h2>Chọn một tùy chọn</h2>
-    <label>
-      <input type="radio" name="option" value="1"> Radio Button 1
-    </label><br>
-    <label>
-      <input type="radio" name="option" value="2"> Radio Button 2
-    </label><br>
-    <button onclick="kiemTra()">Kiểm tra</button>
-    <div id="result"></div>
+    <h2>Chọn một lựa chọn</h2>
+    <label><input type="radio" name="option" value="Lựa chọn 1"> Lựa chọn 1</label>
+    <label><input type="radio" name="option" value="Lựa chọn 2"> Lựa chọn 2</label>
+    <button onclick="checkSelection()">Kiểm tra</button>
+    <p id="result"></p>
   </div>
 
   <script>
-    function kiemTra() {
-      const selected = document.querySelector('input[name="option"]:checked');
-      const resultDiv = document.getElementById("result");
-
-      if (!selected) {
-        resultDiv.innerText = "Vui lòng chọn 1 tùy chọn!";
-        resultDiv.style.color = "red";
-      } else if (selected.value === "1") {
-        resultDiv.innerText = "Bạn đã chọn Radio Button 1!";
-        resultDiv.style.color = "green";
+    function checkSelection() {
+      const radios = document.getElementsByName('option');
+      let selected = null;
+      for (const r of radios) {
+        if (r.checked) {
+          selected = r.value;
+          break;
+        }
+      }
+      const result = document.getElementById('result');
+      if (selected) {
+        result.innerText = '✅ Bạn đã chọn: ' + selected;
       } else {
-        resultDiv.innerText = "Bạn đã chọn Radio Button 2!";
-        resultDiv.style.color = "green";
+        result.innerText = '⚠️ Vui lòng chọn một lựa chọn!';
       }
     }
   </script>
