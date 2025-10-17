@@ -1,83 +1,89 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <title>Radio Button Demo</title>
+  <meta charset="UTF-8">
+  <title>Automation Test - Radio & Checkbox</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f7f9fc;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
+      margin: 40px;
     }
-    .container {
-      background: #fff;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      width: 320px;
-      text-align: center;
-    }
-    h2 {
-      color: #333;
-      margin-bottom: 20px;
-    }
-    label {
-      display: block;
-      margin: 10px 0;
-      font-size: 16px;
-      cursor: pointer;
+    .section {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 30px;
+      width: 400px;
     }
     button {
-      background: #007bff;
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 6px;
-      font-size: 16px;
+      margin-top: 10px;
+      padding: 6px 12px;
       cursor: pointer;
-      transition: background 0.3s;
     }
-    button:hover {
-      background: #0056b3;
-    }
-    #result {
-      margin-top: 20px;
+    p {
+      color: darkblue;
       font-weight: bold;
-      color: #007bff;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h2>Chọn một lựa chọn</h2>
-    <label><input type="radio" name="option" value="Lựa chọn 1"> Lựa chọn 1</label>
-    <label><input type="radio" name="option" value="Lựa chọn 2"> Lựa chọn 2</label>
-    <button onclick="checkSelection()">Kiểm tra</button>
-    <p id="result"></p>
+
+  <h2>Automation Test Page</h2>
+
+  <!-- 🔹 PHẦN 1 -->
+  <div class="section">
+    <h3>Phần 1: Radio button (2 lựa chọn)</h3>
+    <input type="radio" id="r1a" name="group1" value="A"> Option A<br>
+    <input type="radio" id="r1b" name="group1" value="B"> Option B<br><br>
+
+    <button onclick="checkPart1()">Kiểm tra</button>
+    <p id="result1"></p>
+  </div>
+
+  <!-- 🔹 PHẦN 2 -->
+  <div class="section">
+    <h3>Phần 2: Radio button (3 lựa chọn)</h3>
+    <input type="radio" id="r2a" name="group2" value="1"> Option 1<br>
+    <input type="radio" id="r2b" name="group2" value="2"> Option 2<br>
+    <input type="radio" id="r2c" name="group2" value="3"> Option 3<br><br>
+
+    <button onclick="checkPart2()">Kiểm tra</button>
+    <p id="result2"></p>
   </div>
 
   <script>
-    function checkSelection() {
-      const radios = document.getElementsByName('option');
-      let selected = null;
-      for (const r of radios) {
+    // --- Kiểm tra phần 1 ---
+    function checkPart1() {
+      const radios = document.getElementsByName("group1");
+      const result = document.getElementById("result1");
+      let checked = false;
+
+      for (let r of radios) {
         if (r.checked) {
-          selected = r.value;
+          result.textContent = "Bạn đã chọn " + r.value;
+          checked = true;
           break;
         }
       }
-      const result = document.getElementById('result');
-      if (selected) {
-        result.innerText = '✅ Bạn đã chọn: ' + selected;
-      } else {
-        result.innerText = '⚠️ Vui lòng chọn một lựa chọn!';
+      if (!checked) result.textContent = "Vui lòng chọn 1 option ở phần 1!";
+    }
+
+    // --- Kiểm tra phần 2 ---
+    function checkPart2() {
+      const radios = document.getElementsByName("group2");
+      const result = document.getElementById("result2");
+      let checked = false;
+
+      for (let r of radios) {
+        if (r.checked) {
+          result.textContent = "Bạn đã chọn " + r.value;
+          checked = true;
+          break;
+        }
       }
+      if (!checked) result.textContent = "Vui lòng chọn 1 option ở phần 2!";
     }
   </script>
+
 </body>
 </html>
