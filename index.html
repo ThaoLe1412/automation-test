@@ -2,88 +2,145 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Automation Test - Radio & Checkbox</title>
+  <title>Kiểm tra Radio & Checkbox</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      margin: 40px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #f8f9fa, #e8f0fe);
+      margin: 0;
+      padding: 40px;
     }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      padding: 30px 40px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 25px;
+    }
+
     .section {
-      border: 1px solid #ccc;
-      border-radius: 10px;
+      border: 2px solid #007bff;
+      border-radius: 12px;
       padding: 20px;
-      margin-bottom: 30px;
-      width: 400px;
+      margin-bottom: 25px;
     }
-    button {
+
+    .sub-section {
+      border: 1px dashed #007bff;
+      border-radius: 10px;
+      padding: 15px;
       margin-top: 10px;
-      padding: 6px 12px;
-      cursor: pointer;
+      background-color: #f8faff;
     }
-    p {
-      color: darkblue;
+
+    label {
+      display: block;
+      margin: 6px 0;
+      font-size: 15px;
+      color: #333;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+      transform: translateY(-2px);
+    }
+
+    .result {
+      margin-top: 15px;
       font-weight: bold;
+      color: #007bff;
+      background-color: #eef5ff;
+      padding: 8px 12px;
+      border-radius: 6px;
+      display: inline-block;
+    }
+
+    .btn-check {
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
+  <div class="container">
+    <h2>🔍 Kiểm tra Radio Button & Checkbox</h2>
 
-  <h2>Automation Test Page</h2>
+    <!-- PHẦN 1 -->
+    <div class="section">
+      <h3>Phần 1</h3>
+      <label><input type="radio" name="part1" value="Lựa chọn 1"> Lựa chọn 1</label>
+      <label><input type="radio" name="part1" value="Lựa chọn 2"> Lựa chọn 2</label>
 
-  <!-- 🔹 PHẦN 1 -->
-  <div class="section">
-    <h3>Phần 1: Radio button (2 lựa chọn)</h3>
-    <input type="radio" id="r1a" name="group1" value="A"> Option A<br>
-    <input type="radio" id="r1b" name="group1" value="B"> Option B<br><br>
+      <button class="btn-check" onclick="checkPart1()">Kiểm tra</button>
+      <div id="result1" class="result"></div>
+    </div>
 
-    <button onclick="checkPart1()">Kiểm tra</button>
-    <p id="result1"></p>
-  </div>
+    <!-- PHẦN 2 -->
+    <div class="section">
+      <h3>Phần 2</h3>
 
-  <!-- 🔹 PHẦN 2 -->
-  <div class="section">
-    <h3>Phần 2: Radio button (3 lựa chọn)</h3>
-    <input type="radio" id="r2a" name="group2" value="1"> Option 1<br>
-    <input type="radio" id="r2b" name="group2" value="2"> Option 2<br>
-    <input type="radio" id="r2c" name="group2" value="3"> Option 3<br><br>
+      <div class="sub-section">
+        <h4>Phần nhỏ 1</h4>
+        <label><input type="radio" name="sub1" value="Nhỏ 1 - Chọn A"> Chọn A</label>
+        <label><input type="radio" name="sub1" value="Nhỏ 1 - Chọn B"> Chọn B</label>
+      </div>
 
-    <button onclick="checkPart2()">Kiểm tra</button>
-    <p id="result2"></p>
+      <div class="sub-section">
+        <h4>Phần nhỏ 2</h4>
+        <label><input type="radio" name="sub2" value="Nhỏ 2 - Chọn 1"> Chọn 1</label>
+        <label><input type="radio" name="sub2" value="Nhỏ 2 - Chọn 2"> Chọn 2</label>
+        <label><input type="radio" name="sub2" value="Nhỏ 2 - Chọn 3"> Chọn 3</label>
+
+        <button class="btn-check" onclick="checkPart2()">Kiểm tra</button>
+        <div id="result2" class="result"></div>
+      </div>
+    </div>
   </div>
 
   <script>
-    // --- Kiểm tra phần 1 ---
     function checkPart1() {
-      const radios = document.getElementsByName("group1");
+      const selected = document.querySelector('input[name="part1"]:checked');
       const result = document.getElementById("result1");
-      let checked = false;
-
-      for (let r of radios) {
-        if (r.checked) {
-          result.textContent = "Bạn đã chọn " + r.value;
-          checked = true;
-          break;
-        }
-      }
-      if (!checked) result.textContent = "Vui lòng chọn 1 option ở phần 1!";
+      result.textContent = selected ? `✅ Bạn đã chọn: ${selected.value}` : "⚠️ Vui lòng chọn 1 tùy chọn!";
     }
 
-    // --- Kiểm tra phần 2 ---
     function checkPart2() {
-      const radios = document.getElementsByName("group2");
+      const sub1 = document.querySelector('input[name="sub1"]:checked');
+      const sub2 = document.querySelector('input[name="sub2"]:checked');
       const result = document.getElementById("result2");
-      let checked = false;
 
-      for (let r of radios) {
-        if (r.checked) {
-          result.textContent = "Bạn đã chọn " + r.value;
-          checked = true;
-          break;
-        }
+      let text1 = sub1 ? sub1.value : "Phần nhỏ 1 (trống)";
+      let text2 = sub2 ? sub2.value : "";
+
+      if (!sub1 && !sub2) {
+        result.textContent = "⚠️ Vui lòng chọn ít nhất ở phần nhỏ 2.";
+        return;
       }
-      if (!checked) result.textContent = "Vui lòng chọn 1 option ở phần 2!";
+
+      if (sub2) {
+        result.textContent = `✅ ${text1} | ${text2}`;
+      } else {
+        result.textContent = `⚠️ Bạn chưa chọn phần nhỏ 2.`;
+      }
     }
   </script>
-
 </body>
 </html>
